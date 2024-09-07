@@ -1,0 +1,22 @@
+Here's a comparison table highlighting the differences between **arrow functions** and **regular functions** in JavaScript:
+
+| **Feature**                    | **Arrow Function**                                      | **Regular Function**                                 |
+|---------------------------------|---------------------------------------------------------|------------------------------------------------------|
+| **Syntax**                      | Shorter syntax using `=>`. Example: `const func = () => {}` | Longer syntax using `function`. Example: `function func() {}` |
+| **`this` binding**              | Lexically binds `this` to the surrounding context (no re-binding). | Dynamically binds `this` depending on how the function is called. |
+| **`arguments` object**          | Does not have its own `arguments` object (use rest parameters `...args` if needed). | Has its own `arguments` object, containing all arguments passed. |
+| **Constructor**                 | Cannot be used as a constructor (i.e., cannot be called with `new`). | Can be used as a constructor (can call with `new`). |
+| **`super` and `new.target`**    | Cannot use `super` and `new.target`.                    | Can use `super` and `new.target`.                    |
+| **Method definition in classes**| Not suited for method definitions in classes.           | Commonly used for method definitions in classes.     |
+| **Implicit return**             | Can have an implicit return if the function body has no braces. Example: `() => 5` returns 5. | Requires `return` keyword to return a value (no implicit return). |
+| **Hoisting**                    | Not hoisted (like `var`). Must be defined before use.   | Function declarations are hoisted to the top.        |
+| **Prototype**                   | Arrow functions do not have a `prototype` property.     | Regular functions have a `prototype` property.       |
+| **Use of `call`, `apply`, `bind`** | `this` cannot be changed using `call`, `apply`, or `bind` since it is lexically bound. | `this` can be changed using `call`, `apply`, or `bind`. |
+| **Asynchronous functions**      | Useful in asynchronous patterns like promises.          | Also works for asynchronous patterns but with more verbose syntax. |
+| **Best used for**               | Shorter, concise functions, callbacks, and when preserving `this` is important. | More suitable for object methods, constructors, and when `this` needs dynamic binding. |
+
+### Key Takeaways:
+- **Arrow functions** are concise and automatically bind `this` to the surrounding context.
+- **Regular functions** are more flexible but require explicit binding of `this`, making them more suited for object methods, constructors, and dynamic `this` handling.
+
+Let me know if you'd like examples of specific scenarios!
