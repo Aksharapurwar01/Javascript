@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: stretch;
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Top bar with left icon and right heading */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .top-left, .heading {
+            font-size: 2rem;
+        }
+
+        /* Bottom bar with left, center, and right icons */
+        .bottom-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            align-items: flex-end;
+        }
+
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+        }
+
+        .bottom-left, .bottom-right {
+            font-size: 2rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Top bar with top-left icon and heading at the right -->
+        <div class="top-bar">
+            <div class="icon top-left">🔍</div>
+            <div class="heading">My Heading</div>
+        </div>
+
+        <!-- Center icon -->
+        <div class="icon center">⚡</div>
+
+        <!-- Bottom bar with icons at left, center, and right -->
+        <div class="bottom-bar">
+            <div class="icon bottom-left">🌟</div>
+            <div class="icon bottom-right">❤️</div>
+        </div>
+    </div>
+</body>
+</html>
