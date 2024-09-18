@@ -79,3 +79,10 @@ function a() {
     return 8;
   }
 }
+function k(){
+n=9;
+console.log(n)
+let n;
+}
+
+k();

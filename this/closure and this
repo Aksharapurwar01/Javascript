@@ -1,0 +1,65 @@
+You're absolutely right in pointing out that inner functions have access to the **lexical scope** of the outer function, but there's a subtle difference in how **arrow functions** and **regular functions** handle `this` in JavaScript.
+
+### Key Points about `this` in JavaScript:
+- **Regular functions**: `this` refers to the object that calls the function. It’s dynamic and depends on how the function is invoked.
+- **Arrow functions**: `this` is lexically bound, meaning it **inherits** `this` from its surrounding context (the outer function).
+
+When you use an **arrow function**, `this` is not bound to the object you're creating inside the function. Instead, it inherits `this` from the **lexical scope** (the surrounding context), which is typically the global object (`window` in browsers, or `global` in Node.js), or the object that the outer function is bound to (if using `call`, `apply`, or `bind`).
+
+In your case, you want to create an object with a `name` property in the outer function and access it inside the inner function using `this`. The reason this doesn't work with an **arrow function** is that arrow functions **don't bind their own `this`** — they capture `this` from the surrounding context.
+
+### Let's walk through an example:
+
+```javascript
+const createShowFunction = function() {
+    this.name = 'Akshara';  // `this` refers to the object created in createShowFunction
+
+    return () => {
+        return this.name;  // `this` is lexically bound to the outer function's `this`
+    };
+};
+
+const show = createShowFunction.call({});  // Bind `this` to a new empty object
+console.log('Object name:', show());  // Output: Akshara
+```
+
+### Breakdown of this code:
+- **`this.name = 'Akshara'`:** In the outer function (`createShowFunction`), `this` refers to the object created using `call({})`.
+- **Arrow function `() => {}`**: The inner function is an arrow function, so it **doesn't have its own `this`**. Instead, it **inherits `this` from the outer function**, which refers to the object that `createShowFunction` was called on (using `call` in this case).
+- When you call `show()`, the arrow function uses the **lexical `this`** from `createShowFunction`, which refers to the newly created object.
+
+### Why this works with an arrow function:
+- The arrow function is **lexically bound** to the `this` of the outer function. Since `createShowFunction.call({})` sets `this` to the new object, the arrow function can access this object’s properties.
+- In other words, the arrow function "remembers" the `this` of the outer function because it doesn't create its own `this`.
+
+### When it doesn’t work: Regular functions
+If you use a regular function, `this` in the inner function will not automatically refer to the outer `this`. Instead, it will refer to the object that invokes the function. This is why we often need to use `.bind(this)` or store `this` in a variable (like `self` or `that`).
+
+```javascript
+const createShowFunction = function() {
+    this.name = 'Akshara';  // `this` refers to the object created in createShowFunction
+
+    return function() {  // This is a regular function
+        return this.name;  // `this` depends on how the function is called
+    };
+};
+
+const show = createShowFunction.call({});  // `this` is bound to a new object in createShowFunction
+console.log('Object name:', show());  // Output: undefined
+```
+
+### Why the above outputs `undefined`:
+- The inner function is a **regular function**, and when `show()` is called, `this` inside the function refers to the **global object** (in non-strict mode) or `undefined` (in strict mode). It doesn’t refer to the object from `createShowFunction`.
+
+To fix this, you can:
+1. Use **arrow functions** to inherit the outer `this`.
+2. Use **`.bind(this)`** to explicitly bind `this` in the inner function.
+3. Store `this` in a variable (e.g., `const self = this`).
+
+### Recap:
+- **Arrow functions** capture `this` from the surrounding (lexical) scope, so `this` inside the arrow function will always be the `this` from the outer function.
+- **Regular functions** have their own `this`, which depends on how the function is called (e.g., the object that invokes the function).
+  
+In your case, using an arrow function works because it automatically uses the `this` from `createShowFunction` (which you set to an object via `call`).
+
+Let me know if this clarifies things, or if you'd like more examples!

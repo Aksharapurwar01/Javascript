@@ -1,4 +1,4 @@
-// function  are reusble piece of code designed to perform a specific task.function take input (known as parameters and arguments),perform operations or calculations, and can return an output.
+// function  are reusable piece of code designed to perform a specific task.function take input (known as parameters and arguments),perform operations or calculations, and can return an output.
 // # function can be used to make code more readable, maintainable, and efficient.
 
 // Key Concepts of Functions:
