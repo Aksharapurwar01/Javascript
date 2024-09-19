@@ -1,0 +1,10 @@
+event Bubbling
+Process where an event starts at the target element and propagates up through the DOM tree.
+
+event capturing 
+process where an event starts from parent and propogates to child
+
+with the help of event.stopropogation we can stop this
+
+event delegation
+A technique where a parent element listens for events on its child elements using event bubbling.
