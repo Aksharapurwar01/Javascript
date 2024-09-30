@@ -5,7 +5,7 @@ const person = {
     }
 };
 
-const greetFunction = person.greet;
+const greetFunction = person.greet;  //this value kho gyi
 greetFunction(); // undefined 
 
 // const greetFunction = person.greet.bind(person);
